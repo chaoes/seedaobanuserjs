@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         seedaoban
 // @namespace    blog.nenep.ltd
-// @version      0.2
+// @version      0.3
 // @description  在b站，腾讯视频添加跳转解析网站按钮
 // @author       neNep
 // @match        https://www.bilibili.com/bangumi/play/*
@@ -31,6 +31,7 @@ function setDaobanUrl(){
     onPlay();
 }
 function setOnClick(){
+			url = window.location.href;
             $("#daobanbtn").click(function(){
             GM_setValue ("vurl", url);
             GM_openInTab(daobanurl,false);
