@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         seedaoban
 // @namespace    blog.nenep.ltd
-// @version      0.3
+// @version      0.4
 // @description  在b站，腾讯视频添加跳转解析网站按钮
 // @author       neNep
 // @match        https://www.bilibili.com/bangumi/play/*
@@ -21,9 +21,11 @@ function addCss(){
     GM_addStyle("#daobanbtn{  background: #eb94d0; background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);background-image: -moz-linear-gradient(top, #eb94d0, #2079b0); background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);background-image: -o-linear-gradient(top, #eb94d0, #2079b0);background-image: linear-gradient(to bottom, #eb94d0, #2079b0);}  -webkit-border-radius: 28; -moz-border-radius: 28; border-radius: 28px;text-shadow: 3px 2px 1px #9daef5; -webkit-box-shadow: 6px 5px 24px #666666; -moz-box-shadow: 6px 5px 24px #666666;box-shadow: 6px 5px 24px #666666; font-family: Arial;color: #fafafa;font-size: 27px;padding: 19px; text-decoration: none;");
 }
 function BaddButton(){
+    if($(".daoban-info").length>0) return;
     $("#toolbar_module").append('<div class="daoban-info"><button id="daobanbtn" type="button" class="btn btn-default">看盗版</button></div>');
 }
 function QaddButton(){
+    if($(".daoban-info").length>0) return;
     $(".player_title").append('<div class="daoban-info"><button id="daobanbtn" type="button" class="btn btn-default">看盗版</button></div>');
 }
 function setDaobanUrl(){
@@ -31,8 +33,8 @@ function setDaobanUrl(){
     onPlay();
 }
 function setOnClick(){
-			url = window.location.href;
             $("#daobanbtn").click(function(){
+            url = window.location.href;
             GM_setValue ("vurl", url);
             GM_openInTab(daobanurl,false);
         });
